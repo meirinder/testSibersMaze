@@ -7,23 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C454CD8E219FD2FB001B1465 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C454CD8D219FD2FB001B1465 /* Alert.swift */; };
 		C45B5C42219AA2B4001714A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C41219AA2B4001714A8 /* AppDelegate.swift */; };
-		C45B5C44219AA2B4001714A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C43219AA2B4001714A8 /* ViewController.swift */; };
 		C45B5C47219AA2B4001714A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C45B5C45219AA2B4001714A8 /* Main.storyboard */; };
 		C45B5C4A219AA2B4001714A8 /* TestSibersMaze.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C48219AA2B4001714A8 /* TestSibersMaze.xcdatamodeld */; };
 		C45B5C4C219AA2B7001714A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C45B5C4B219AA2B7001714A8 /* Assets.xcassets */; };
 		C45B5C4F219AA2B7001714A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C45B5C4D219AA2B7001714A8 /* LaunchScreen.storyboard */; };
+		C45B5C57219AAECA001714A8 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C56219AAEC9001714A8 /* Cell.swift */; };
+		C45B5C59219AB04E001714A8 /* MazeShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C58219AB04E001714A8 /* MazeShell.swift */; };
+		C45B5C5B219AFA3A001714A8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C5A219AFA3A001714A8 /* StartViewController.swift */; };
+		C45B5C5F219B004D001714A8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C5E219B004D001714A8 /* GameViewController.swift */; };
+		C45B5C61219B1A1E001714A8 /* InventoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C60219B1A1E001714A8 /* InventoryCollectionViewCell.swift */; };
+		C45B5C63219C435F001714A8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C62219C435F001714A8 /* Item.swift */; };
+		C45B5C69219C5047001714A8 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C68219C5047001714A8 /* Inventory.swift */; };
+		C45B5C6B219C50EF001714A8 /* InventoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C6A219C50EF001714A8 /* InventoryProtocol.swift */; };
+		C45B5C6D219C5575001714A8 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C6C219C5575001714A8 /* Player.swift */; };
+		C45B5C6F219C56E4001714A8 /* PlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C6E219C56E4001714A8 /* PlayerProtocol.swift */; };
+		C45B5C71219C5B70001714A8 /* EatableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C70219C5B70001714A8 /* EatableItem.swift */; };
+		C45B5C75219C5F29001714A8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C74219C5F29001714A8 /* Game.swift */; };
+		C45B5C77219C6AC9001714A8 /* CellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C76219C6AC9001714A8 /* CellFactory.swift */; };
+		C45B5C79219D76D4001714A8 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C78219D76D4001714A8 /* Chest.swift */; };
+		C45B5C7B219D76EB001714A8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B5C7A219D76EB001714A8 /* Key.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C454CD8D219FD2FB001B1465 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		C45B5C3E219AA2B4001714A8 /* TestSibersMaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestSibersMaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45B5C41219AA2B4001714A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C45B5C43219AA2B4001714A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C45B5C46219AA2B4001714A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C45B5C49219AA2B4001714A8 /* TestSibersMaze.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestSibersMaze.xcdatamodel; sourceTree = "<group>"; };
 		C45B5C4B219AA2B7001714A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C45B5C4E219AA2B7001714A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C45B5C50219AA2B7001714A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C45B5C56219AAEC9001714A8 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		C45B5C58219AB04E001714A8 /* MazeShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeShell.swift; sourceTree = "<group>"; };
+		C45B5C5A219AFA3A001714A8 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		C45B5C5E219B004D001714A8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		C45B5C60219B1A1E001714A8 /* InventoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		C45B5C62219C435F001714A8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		C45B5C68219C5047001714A8 /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
+		C45B5C6A219C50EF001714A8 /* InventoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryProtocol.swift; sourceTree = "<group>"; };
+		C45B5C6C219C5575001714A8 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		C45B5C6E219C56E4001714A8 /* PlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProtocol.swift; sourceTree = "<group>"; };
+		C45B5C70219C5B70001714A8 /* EatableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatableItem.swift; sourceTree = "<group>"; };
+		C45B5C74219C5F29001714A8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		C45B5C76219C6AC9001714A8 /* CellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFactory.swift; sourceTree = "<group>"; };
+		C45B5C78219D76D4001714A8 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
+		C45B5C7A219D76EB001714A8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +86,23 @@
 		C45B5C40219AA2B4001714A8 /* TestSibersMaze */ = {
 			isa = PBXGroup;
 			children = (
+				C454CD8D219FD2FB001B1465 /* Alert.swift */,
 				C45B5C41219AA2B4001714A8 /* AppDelegate.swift */,
-				C45B5C43219AA2B4001714A8 /* ViewController.swift */,
+				C45B5C5A219AFA3A001714A8 /* StartViewController.swift */,
+				C45B5C5E219B004D001714A8 /* GameViewController.swift */,
+				C45B5C60219B1A1E001714A8 /* InventoryCollectionViewCell.swift */,
+				C45B5C68219C5047001714A8 /* Inventory.swift */,
+				C45B5C6A219C50EF001714A8 /* InventoryProtocol.swift */,
+				C45B5C74219C5F29001714A8 /* Game.swift */,
+				C45B5C6C219C5575001714A8 /* Player.swift */,
+				C45B5C6E219C56E4001714A8 /* PlayerProtocol.swift */,
+				C45B5C62219C435F001714A8 /* Item.swift */,
+				C45B5C70219C5B70001714A8 /* EatableItem.swift */,
+				C45B5C78219D76D4001714A8 /* Chest.swift */,
+				C45B5C7A219D76EB001714A8 /* Key.swift */,
+				C45B5C56219AAEC9001714A8 /* Cell.swift */,
+				C45B5C76219C6AC9001714A8 /* CellFactory.swift */,
+				C45B5C58219AB04E001714A8 /* MazeShell.swift */,
 				C45B5C45219AA2B4001714A8 /* Main.storyboard */,
 				C45B5C4B219AA2B7001714A8 /* Assets.xcassets */,
 				C45B5C4D219AA2B7001714A8 /* LaunchScreen.storyboard */,
@@ -138,9 +183,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C45B5C44219AA2B4001714A8 /* ViewController.swift in Sources */,
+				C454CD8E219FD2FB001B1465 /* Alert.swift in Sources */,
+				C45B5C6D219C5575001714A8 /* Player.swift in Sources */,
+				C45B5C61219B1A1E001714A8 /* InventoryCollectionViewCell.swift in Sources */,
+				C45B5C6F219C56E4001714A8 /* PlayerProtocol.swift in Sources */,
+				C45B5C5B219AFA3A001714A8 /* StartViewController.swift in Sources */,
+				C45B5C57219AAECA001714A8 /* Cell.swift in Sources */,
+				C45B5C69219C5047001714A8 /* Inventory.swift in Sources */,
+				C45B5C6B219C50EF001714A8 /* InventoryProtocol.swift in Sources */,
+				C45B5C71219C5B70001714A8 /* EatableItem.swift in Sources */,
+				C45B5C7B219D76EB001714A8 /* Key.swift in Sources */,
 				C45B5C42219AA2B4001714A8 /* AppDelegate.swift in Sources */,
+				C45B5C75219C5F29001714A8 /* Game.swift in Sources */,
+				C45B5C63219C435F001714A8 /* Item.swift in Sources */,
 				C45B5C4A219AA2B4001714A8 /* TestSibersMaze.xcdatamodeld in Sources */,
+				C45B5C5F219B004D001714A8 /* GameViewController.swift in Sources */,
+				C45B5C79219D76D4001714A8 /* Chest.swift in Sources */,
+				C45B5C59219AB04E001714A8 /* MazeShell.swift in Sources */,
+				C45B5C77219C6AC9001714A8 /* CellFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
