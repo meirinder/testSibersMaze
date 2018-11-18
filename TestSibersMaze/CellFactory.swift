@@ -54,7 +54,7 @@ class CellFactory: NSObject {
                 xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
                 yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
             }
-            coordinateStore.append((xCoordinate,yCoordinate))
+            coordinateStore.append((yCoordinate,xCoordinate))
         }
         return (itemStore,coordinateStore)
     }
@@ -62,7 +62,7 @@ class CellFactory: NSObject {
     
     func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(y: Int, x: Int)]) -> Bool{
         for coordinate in coordinateStore{
-            if xCoordinate == coordinate.y && yCoordinate == coordinate.x {
+            if xCoordinate == coordinate.x && yCoordinate == coordinate.y {
                 return true
             }
         }

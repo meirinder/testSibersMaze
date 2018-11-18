@@ -57,11 +57,11 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
-    @objc func pressed(_ sender: Any) {
-        if let name = (sender as! UIButton).titleLabel?.text!{
+    @objc func pressed(_ sender: UIButton) {
+        if let name = sender.titleLabel?.text!{
             var number = 0
             for i in 0..<itemButtons.count {
-                if sender as! UIButton == itemButtons[i]{
+                if sender == itemButtons[i]{
                     number = i
                 }
             }
@@ -71,7 +71,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 game.raiseItem(name: name,
                                cellCoordinate: (game.getCurrentPositionOfPlayer()),
                                itemCoordinate: (yItemCoordinate,xItemCoordinate))
-                (sender as! UIButton).isHidden = true
+                sender.isHidden = true
                 inventoryCollectionView.reloadData()
                 return
             }
@@ -230,10 +230,11 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     
     func fillButton(title: String, coordinates: (y: Int, x: Int), image: UIImage) {
-        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].setBackgroundImage(image, for: .normal)
-        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].titleLabel?.isHidden = true
-        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].setTitle(title, for: .normal)
-        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].isHidden = false
+        let index = game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x
+        itemButtons[index].setBackgroundImage(image, for: .normal)
+        itemButtons[index].titleLabel?.isHidden = true
+        itemButtons[index].setTitle(title, for: .normal)
+        itemButtons[index].isHidden = false
     }
     
 

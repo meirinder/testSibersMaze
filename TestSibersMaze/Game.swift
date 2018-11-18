@@ -77,8 +77,8 @@ class Game: NSObject {
         let key = Key(name: "Ключ",
                       specification: "This is the key - he opens the chest",
                       identifier: "1")
-        var xCellCoordinate = Int.random(in: 0..<mazeSize.y)
-        var yCellCoordinate = Int.random(in: 0..<mazeSize.x)
+        var xCellCoordinate = Int.random(in: 0..<mazeSize.x)
+        var yCellCoordinate = Int.random(in: 0..<mazeSize.y)
         
         mazeShell.getMaze()[yCellCoordinate][xCellCoordinate].addItemAndCoordinate(item: key,
                                                                                    coordinate: searchEptySpace(cell: mazeShell.getMaze()[yCellCoordinate][xCellCoordinate], cellSize: (3,3)))
