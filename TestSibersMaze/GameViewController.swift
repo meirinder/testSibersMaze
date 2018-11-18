@@ -56,6 +56,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         descriptionLabel.text = ""
     }
     
+    
     @objc func pressed(_ sender: Any) {
         let name = (sender as! UIButton).titleLabel?.text!
         var number = 0
@@ -88,6 +89,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         displayCell()
     }
 
+    
     @IBAction func downStepAction(_ sender: Any) {
         if game.nextStep(direction: "Down") {
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
@@ -98,6 +100,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         displayCell()
     }
 
+    
     @IBAction func leftStepAction(_ sender: Any) {
         if game.nextStep(direction: "Left") {
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
@@ -108,6 +111,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         displayCell()
     }
 
+    
     @IBAction func upStepAction(_ sender: Any) {
         if game.nextStep(direction: "Up"){
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
@@ -119,7 +123,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
 
-
     @IBAction func discardItemAction(_ sender: Any) {
         if game.getPlayer().discardItem() {
             Alert.action(title: "Error",
@@ -128,6 +131,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         inventoryCollectionView.reloadData()
     }
+    
+    
     @IBAction func dropItemAction(_ sender: Any) {
         let drop = game.dropItem(index: game.getPlayer().getSelctedItemInInventory(), cellCoordinate: game.getCurrentPositionOfPlayer())
         if drop.0{
@@ -139,10 +144,12 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         displayCell()
     }
+    
+    
     @IBAction func useItemAction(_ sender: Any) {
         let use = game.getPlayer().useItem()
-        if use.0{
-            switch use.2{
+        if use.successfulExecution{
+            switch use.code{
             case -1:
                 Alert.action(title: "Error",
                              message: "You must select an item",
@@ -159,9 +166,9 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             
         }
-        switch use.1 {
+        switch use.type {
         case "Eat":
-            Alert.action(title: "\(use.2) hp",
+            Alert.action(title: "\(use.code) hp",
                          message: "You ate the mushroom",
                          view: self)
             break
@@ -220,6 +227,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
 
+    
     func fillButton(title: String, coordinates: (y: Int, x: Int), image: UIImage) {
         itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].setBackgroundImage(image, for: .normal)
         itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].titleLabel?.isHidden = true
@@ -228,10 +236,14 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
 
+    // MARK: release Delegate and Datasource
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  game.getPlayer().getInventory().getItemStore().count
     }
 
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = inventoryCollectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath) as! InventoryCollectionViewCell
         cell.itemNameLabel.text = game.getPlayer().getInventory().getItemStore()[indexPath.item].name
@@ -241,6 +253,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
 
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = indexPath.item
         game.getPlayer().setSelctedItemInInventory(index: currentCell)
@@ -256,7 +269,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell?.layer.borderColor = UIColor.green.cgColor
         collectionView.allowsMultipleSelection = false
         descriptionLabel.text = game.getPlayer().getInventory().getItemStore()[currentCell].specification
-        print(game.getPlayer().getInventory().getItemStore()[currentCell].name)
     }
 
 

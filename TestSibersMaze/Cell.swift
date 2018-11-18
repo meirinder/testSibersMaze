@@ -15,7 +15,7 @@ class Cell: NSObject {
     private var presenceOfTheLeftWall: Bool
     private var presenceOfTheBottomWall: Bool
     private var presenceOfTheTopWall: Bool
-    private let sizeOfCell: (Int,Int)
+    private let sizeOfCell: (y: Int, x: Int)
     private var itemsInRoom: [Item]
     private var itemsCoordinates: [(y: Int, x: Int)]
     var variety : Int
@@ -31,6 +31,7 @@ class Cell: NSObject {
         self.itemsCoordinates = []
     }
     
+    
     init(rightWall: Bool, leftWall: Bool, upWall: Bool, downWall: Bool, variety: Int = 0) {
         self.variety = variety
         self.presenceOfTheRightWall = rightWall
@@ -42,16 +43,18 @@ class Cell: NSObject {
         self.itemsCoordinates = []
     }
     
+    
     func addItem(item: Item) {
-        var randomX = Int.random(in: 0...2)
-        var randomY = Int.random(in: 0...2)
+        var randomX = Int.random(in: 0..<sizeOfCell.x)
+        var randomY = Int.random(in: 0..<sizeOfCell.y)
         while checkEmptySpace(xCoordinate: randomX, yCoordinate: randomY) {
-            randomX = Int.random(in: 0...2)
-            randomY = Int.random(in: 0...2)
+            randomX = Int.random(in: 0..<sizeOfCell.x)
+            randomY = Int.random(in: 0..<sizeOfCell.y)
         }
         itemsCoordinates.append((randomY,randomX))
         itemsInRoom.append(item)
     }
+    
     
     func checkEmptySpace(xCoordinate: Int, yCoordinate: Int) -> Bool {
         for coordinate in itemsCoordinates {
@@ -61,6 +64,7 @@ class Cell: NSObject {
         }
         return false
     }
+    
     
     func removeItem(index: Int) -> Item {
         let res = itemsInRoom[index]
@@ -84,19 +88,23 @@ class Cell: NSObject {
         return itemsCoordinates
     }
     
+    
     func addItemAndCoordinate(item: Item, coordinate: (Int,Int)) {
         itemsInRoom.append(item)
         itemsCoordinates.append(coordinate)
     }
     
+    
     func getItemsInRoom() -> [Item] {
         return itemsInRoom
     }
+    
     
     func setItemsInRoom(itemStore: [Item], coordinatesStore: [(Int,Int)]) {
         self.itemsInRoom = itemStore
         self.itemsCoordinates = coordinatesStore
     }
+    
     
     func setWalls(presenceOfTheRightWall: Bool, presenceOfTheLeftWall: Bool, presenceOfTheTopWall: Bool, presenceOfTheBottomWall: Bool) {
         self.presenceOfTheRightWall = presenceOfTheRightWall
@@ -105,39 +113,45 @@ class Cell: NSObject {
         self.presenceOfTheTopWall = presenceOfTheTopWall
     }
     
+    
     func setRightWall(presenceOfTheRightWall: Bool) {
         self.presenceOfTheRightWall = presenceOfTheRightWall
     }
+    
     
     func setLeftWall(presenceOfTheLeftWall: Bool) {
         self.presenceOfTheLeftWall = presenceOfTheLeftWall
     }
     
+    
     func setUpWall(presenceOfTheTopWall: Bool) {
         self.presenceOfTheTopWall = presenceOfTheTopWall
     }
+    
     
     func setDownWall(presenceOfTheBottomWall: Bool) {
         self.presenceOfTheBottomWall = presenceOfTheBottomWall
     }
     
+    
     func getDownWall() -> Bool {
         return self.presenceOfTheBottomWall
     }
+    
     
     func getUpWall() -> Bool {
         return self.presenceOfTheTopWall
     }
     
+    
     func getRightWall() -> Bool {
         return self.presenceOfTheRightWall
     }
     
+    
     func getLeftWall() -> Bool {
         return self.presenceOfTheLeftWall
     }
-    
-    
 }
 
 extension Cell: NSCopying {

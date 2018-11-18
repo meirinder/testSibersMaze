@@ -21,9 +21,11 @@ class Player: NSObject {
         selctedItemInInventory = -1
     }
     
+    
     func getHealth() -> Int {
         return health
     }
+    
     
     func changeHealth(much: Int) -> Bool {
         health += much
@@ -32,6 +34,7 @@ class Player: NSObject {
         }
         return false
     }
+    
     
     init(protocolImplementation: InventoryProtocol ) {
         self.inventory = protocolImplementation
@@ -44,14 +47,15 @@ class Player: NSObject {
         selctedItemInInventory = index
     }
     
+    
     func getSelctedItemInInventory() -> Int {
         return selctedItemInInventory
     }
     
+    
     func getInventory() -> InventoryProtocol {
         return inventory
     }
-    
 }
 
 extension Player: PlayerProtocol{
@@ -64,6 +68,7 @@ extension Player: PlayerProtocol{
         return false
     }
     
+    
     func discardItem()  -> Bool {
         if selctedItemInInventory != -1 {
             inventory.removeItemAt(number: selctedItemInInventory)
@@ -72,7 +77,8 @@ extension Player: PlayerProtocol{
         return true
     }
     
-    func useItem() -> (Bool,String,Int){
+    
+    func useItem() -> (successfulExecution: Bool, type: String, code: Int){
         if selctedItemInInventory != -1 {
             let item = inventory.getItemStore()[selctedItemInInventory]
             switch item {

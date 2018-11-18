@@ -9,7 +9,9 @@
 
 
 protocol PlayerProtocol {
+    
     func discardItem()  -> Bool 
-    func useItem()  -> (Bool,String,Int)
+    func useItem()  -> (successfulExecution: Bool, type: String, code: Int)
     func openChest(key: Key, chest: Chest) -> Bool
+    
 }
