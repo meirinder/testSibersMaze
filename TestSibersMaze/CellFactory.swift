@@ -31,15 +31,15 @@ class CellFactory: NSObject {
                                        countOfChangedHealth: Int.random(in: healthChanged.min...healthChanged.max))
                 break
                 case "Кость":
-                     item = Item(name: nameItems[Int.random(in: 1..<numberOfItemsPerLineOrColumn)],
+                     item = Item(name: name,
                                  specification: "This is a bone, this is a useless thing.")
                 break
                 case "Камень":
-                     item = Item(name: nameItems[Int.random(in: 1..<numberOfItemsPerLineOrColumn)],
+                     item = Item(name: name,
                                  specification: "This is a stone, this is a useless thing.")
                 break
                 default:
-                     item = Item(name: nameItems[Int.random(in: 1..<numberOfItemsPerLineOrColumn)],
+                     item = Item(name: name,
                                  specification: "This is some kind of, this is a useless thing.")
                 break
             }

@@ -256,6 +256,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell?.layer.borderColor = UIColor.green.cgColor
         collectionView.allowsMultipleSelection = false
         descriptionLabel.text = game.getPlayer().getInventory().getItemStore()[currentCell].specification
+        print(game.getPlayer().getInventory().getItemStore()[currentCell].name)
     }
 
 
