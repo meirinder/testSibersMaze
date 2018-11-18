@@ -32,6 +32,9 @@ class Player: NSObject {
         if health < 0 {
             return true
         }
+        if health > maxHealth{
+            health = maxHealth
+        }
         return false
     }
     
