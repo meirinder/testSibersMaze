@@ -58,22 +58,23 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     @objc func pressed(_ sender: Any) {
-        let name = (sender as! UIButton).titleLabel?.text!
-        var number = 0
-        for i in 0..<itemButtons.count {
-            if sender as! UIButton == itemButtons[i]{
-                number = i
+        if let name = (sender as! UIButton).titleLabel?.text!{
+            var number = 0
+            for i in 0..<itemButtons.count {
+                if sender as! UIButton == itemButtons[i]{
+                    number = i
+                }
             }
-        }
-        if name != "Сундук" {
-            let yItemCoordinate: Int = number / 3
-            let xItemCoordinate: Int = number - (3 * yItemCoordinate)
-            game.raiseItem(name: name!,
-                           cellCoordinate: (game.getCurrentPositionOfPlayer()),
-                           itemCoordinate: (yItemCoordinate,xItemCoordinate))
-            (sender as! UIButton).isHidden = true
-            inventoryCollectionView.reloadData()
-            return
+            if name != "Сундук" {
+                let yItemCoordinate: Int = number / 3
+                let xItemCoordinate: Int = number - (3 * yItemCoordinate)
+                game.raiseItem(name: name,
+                               cellCoordinate: (game.getCurrentPositionOfPlayer()),
+                               itemCoordinate: (yItemCoordinate,xItemCoordinate))
+                (sender as! UIButton).isHidden = true
+                inventoryCollectionView.reloadData()
+                return
+            }
         }
         Alert.action(title: "Information", message: "You must use the key", view: self)
     }
