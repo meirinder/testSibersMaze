@@ -29,23 +29,22 @@ class CellFactory: NSObject {
                     item = EatableItem(name: "Гриб",
                                        specification: "This is a mushroom, if you eat it, \n you can get poisoned or increase your health.",
                                        countOfChangedHealth: Int.random(in: healthChanged.min...healthChanged.max))
-                break
+                    break
                 case "Кость":
                      item = Item(name: name,
                                  specification: "This is a bone, this is a useless thing.")
-                break
+                    break
                 case "Камень":
                      item = Item(name: name,
                                  specification: "This is a stone, this is a useless thing.")
-                break
+                    break
                 default:
                      item = Item(name: name,
                                  specification: "This is some kind of, this is a useless thing.")
-                break
+                    break
             }
             
             itemStore.append(item)
-            
             
             xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
             yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
@@ -59,6 +58,7 @@ class CellFactory: NSObject {
         }
         return (itemStore,coordinateStore)
     }
+    
     
     func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(y: Int, x: Int)]) -> Bool{
         for coordinate in coordinateStore{

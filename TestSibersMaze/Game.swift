@@ -26,7 +26,6 @@ class Game: NSObject {
     }
     
     
-    
     init(maze: MazeShell) {
         player = Player(protocolImplementation: Inventory())
         self.mazeShell = maze
@@ -35,13 +34,16 @@ class Game: NSObject {
         mazeSize = maze.getSize()
     }
     
+    
     func getPlayer() -> Player {
         return player
     }
     
+    
     func getMazeShell() -> MazeShell {
         return mazeShell
     }
+    
     
     func startGame() {
         currentPositionOfPlayer = ((mazeSize.y)/2,(mazeSize.x)/2)
@@ -60,13 +62,16 @@ class Game: NSObject {
         distributeKeyAndChest()
     }
     
+    
     func getStepCounter() -> Int {
         return stepCounter
     }
  
+    
     func getCurrentPositionOfPlayer() -> (y: Int,x: Int) {
         return currentPositionOfPlayer
     }
+    
     
     func distributeKeyAndChest() {
         let key = Key(name: "Ключ",
@@ -89,7 +94,6 @@ class Game: NSObject {
     }
     
     
-    
     func searchEptySpace(cell: Cell, cellSize: (y: Int, x: Int)) -> (Int,Int) {
         var xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
         var yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
@@ -102,6 +106,7 @@ class Game: NSObject {
         return (yCoordinate,xCoordinate)
     }
     
+    
     func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(y: Int, x: Int)]) -> Bool {
         for coordinate in coordinateStore {
             if xCoordinate == coordinate.x && yCoordinate == coordinate.y {
@@ -110,6 +115,7 @@ class Game: NSObject {
         }
         return false
     }
+    
     
     func nextStep(direction: String) -> Bool {
         if player.changeHealth(much: -1) {
@@ -135,6 +141,7 @@ class Game: NSObject {
         return false
     }
     
+    
     func raiseItem(name: String, cellCoordinate: (y: Int, x: Int), itemCoordinate: (y: Int, x: Int)) {
         let cell = mazeShell.getMaze()[cellCoordinate.y][cellCoordinate.x]
         var i = 0;
@@ -144,6 +151,7 @@ class Game: NSObject {
         let item = cell.removeItem(index: i)
         player.getInventory().putItem(item: item)
     }
+    
     
     func dropItem(index: Int, cellCoordinate: (y: Int, x: Int)) -> (Bool,String) {
         let cell = mazeShell.getMaze()[cellCoordinate.y][cellCoordinate.x]
@@ -157,10 +165,5 @@ class Game: NSObject {
         } else{
             return (true, "You must select an item")
         }
-        
     }
-    
-   
-    
-    
 }

@@ -27,6 +27,7 @@ class StartViewController: UIViewController {
         }
     }
     
+    
     @IBAction func startGameAction(_ sender: Any) {
         if (columnCounterTextField.text?.isEmpty)! {
             Alert.action(title: "Error",
@@ -47,7 +48,5 @@ class StartViewController: UIViewController {
         }else{
             performSegue(withIdentifier: "StartGameSegue", sender: self)
         }
-        
     }
-
 }

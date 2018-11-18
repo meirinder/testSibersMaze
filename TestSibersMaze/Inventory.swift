@@ -27,13 +27,16 @@ extension Inventory : InventoryProtocol{
         return item
     }
     
+    
     func putItem(item: Item) {
         itemStore.append(item)
     }
     
+    
     func removeItemAt(number: Int){
          itemStore.remove(at: number)
     }
+    
     
     func getItemStore() -> [Item]{
         return itemStore

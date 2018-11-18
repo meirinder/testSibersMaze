@@ -8,8 +8,10 @@
 
 
 protocol InventoryProtocol {
+    
     func dropItemAt(number: Int) -> Item
     func putItem(item: Item)
     func getItemStore() -> [Item]
     func removeItemAt(number: Int)
+    
 }
