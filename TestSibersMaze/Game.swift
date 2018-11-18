@@ -153,7 +153,7 @@ class Game: NSObject {
     }
     
     
-    func dropItem(index: Int, cellCoordinate: (y: Int, x: Int)) -> (Bool,String) {
+    func dropItem(index: Int, cellCoordinate: (y: Int, x: Int)) -> (error: Bool, typeOfError: String) {
         let cell = mazeShell.getMaze()[cellCoordinate.y][cellCoordinate.x]
         if (index != -1) {
             if cell.getItemsInRoom().count >= maxItemCountInCell {

@@ -136,9 +136,9 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBAction func dropItemAction(_ sender: Any) {
         let drop = game.dropItem(index: game.getPlayer().getSelctedItemInInventory(), cellCoordinate: game.getCurrentPositionOfPlayer())
-        if drop.0{
+        if drop.error{
             Alert.action(title: "Error",
-                         message: drop.1,
+                         message: drop.typeOfError,
                          view: self)
         }
         inventoryCollectionView.reloadData()
@@ -174,7 +174,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                          view: self)
             break
         case "Key":
-            if game.getMazeShell().getMaze()[game.getCurrentPositionOfPlayer().0][game.getCurrentPositionOfPlayer().1].hasChest(){
+            if game.getMazeShell().getMaze()[game.getCurrentPositionOfPlayer().y][game.getCurrentPositionOfPlayer().x].hasChest(){
                 performSegue(withIdentifier: "WinEndGameSegue", sender: self)
             }
             break
@@ -258,7 +258,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = indexPath.item
         game.getPlayer().setSelctedItemInInventory(index: currentCell)
-        if (((game.getPlayer().getInventory().getItemStore()[currentCell]) is EatableItem)||((game.getPlayer().getInventory().getItemStore()[currentCell]) is Key)) {
+        let item = game.getPlayer().getInventory().getItemStore()[currentCell]
+        if ((item is EatableItem) || (item is Key)) {
             useItemButton.isHidden = false
         }else {
             useItemButton.isHidden = true
@@ -269,7 +270,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell?.layer.borderWidth = 2
         cell?.layer.borderColor = UIColor.green.cgColor
         collectionView.allowsMultipleSelection = false
-        descriptionLabel.text = game.getPlayer().getInventory().getItemStore()[currentCell].specification
+        descriptionLabel.text = item.specification
     }
 
 
