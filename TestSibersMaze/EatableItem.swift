@@ -6,15 +6,16 @@
 //  Copyright © 2018 Kulizhnikov. All rights reserved.
 //
 
-import UIKit
+
 
 class EatableItem: Item {
 
     let countOfChangedHealth: Int
     
-    init(name: String, descript: String, countOfChangedHealth: Int) {
+    init(name: String, specification: String, countOfChangedHealth: Int) {
         self.countOfChangedHealth = countOfChangedHealth
-        super.init(name: name, descript: descript)
+        super.init(name: name,
+                   specification: specification)
     }
     
     

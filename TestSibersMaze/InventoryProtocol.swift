@@ -6,7 +6,6 @@
 //  Copyright © 2018 Kulizhnikov. All rights reserved.
 //
 
-import Foundation
 
 protocol InventoryProtocol {
     func dropItemAt(number: Int) -> Item

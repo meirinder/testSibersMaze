@@ -6,15 +6,15 @@
 //  Copyright © 2018 Kulizhnikov. All rights reserved.
 //
 
-import UIKit
 
 class Key: Item {
 
     let identifier: String
     
-    init(name: String, descript: String, identifier: String) {
+    init(name: String, specification: String, identifier: String) {
         self.identifier = identifier
-        super.init(name: name, descript: descript)
+        super.init(name: name,
+                   specification: specification)
     }
     
 }

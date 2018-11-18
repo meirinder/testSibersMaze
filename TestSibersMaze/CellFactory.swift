@@ -11,51 +11,58 @@ import UIKit
 class CellFactory: NSObject {
 
     let nameItems = ["Гриб","Кость","Камень"]
+    let itemsCount = 4
+    let healthChanged = (min: -25, max: 25)
     
     
-    
-    func createCell(sizeX: Int, sizeY: Int) -> ([Item],[(Int,Int)]){
-        let randomInt = Int.random(in: 0...3)
+    func createCell(numberOfItemsPerLineOrColumn: Int) -> ([Item],[(Int,Int)]){
+        let randomInt = Int.random(in: 0..<itemsCount)
         var itemStore = [Item]()
         var coordinateStore = [(Int,Int)]()
         var xCoordinate: Int
         var yCoordinate: Int
         var item: Item
-        for _ in 0...randomInt{
-            let name = nameItems[Int.random(in: 0...2)]
+        for _ in 0...randomInt {
+            let name = nameItems[Int.random(in: 0..<nameItems.count)]
             switch name{
                 case "Гриб":
-                    item = EatableItem(name: "Гриб", descript: "This is a mushroom, if you eat it, you can get poisoned.", countOfChangedHealth: -25)
+                    item = EatableItem(name: "Гриб",
+                                       specification: "This is a mushroom, if you eat it, \n you can get poisoned or increase your health.",
+                                       countOfChangedHealth: Int.random(in: healthChanged.min...healthChanged.max))
                 break
                 case "Кость":
-                     item = Item(name: nameItems[Int.random(in: 1...2)], descript: "This is a bone, this is a useless thing.")
+                     item = Item(name: nameItems[Int.random(in: 1..<numberOfItemsPerLineOrColumn)],
+                                 specification: "This is a bone, this is a useless thing.")
                 break
                 case "Камень":
-                     item = Item(name: nameItems[Int.random(in: 1...2)], descript: "This is a stone, this is a useless thing.")
+                     item = Item(name: nameItems[Int.random(in: 1..<numberOfItemsPerLineOrColumn)],
+                                 specification: "This is a stone, this is a useless thing.")
                 break
                 default:
-                     item = Item(name: nameItems[Int.random(in: 1...2)], descript: "This is some kind of, this is a useless thing.")
+                     item = Item(name: nameItems[Int.random(in: 1..<numberOfItemsPerLineOrColumn)],
+                                 specification: "This is some kind of, this is a useless thing.")
                 break
             }
             
             itemStore.append(item)
             
             
-            xCoordinate = Int.random(in: 0..<sizeX)
-            yCoordinate = Int.random(in: 0..<sizeY)
-            while (checkItemSpace(xCoordinate: xCoordinate, yCoordinate: yCoordinate,
-                                  coordinateStore: coordinateStore)){
-                xCoordinate = Int.random(in: 0..<sizeX)
-                yCoordinate = Int.random(in: 0..<sizeY)
+            xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
+            yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
+            while (checkItemSpace(xCoordinate: xCoordinate,
+                                  yCoordinate: yCoordinate,
+                                  coordinateStore: coordinateStore)) {
+                xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
+                yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
             }
             coordinateStore.append((xCoordinate,yCoordinate))
         }
         return (itemStore,coordinateStore)
     }
     
-    func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(Int,Int)]) -> Bool{
+    func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(y: Int, x: Int)]) -> Bool{
         for coordinate in coordinateStore{
-            if xCoordinate == coordinate.1 && yCoordinate == coordinate.0 {
+            if xCoordinate == coordinate.y && yCoordinate == coordinate.x {
                 return true
             }
         }

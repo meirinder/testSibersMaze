@@ -41,7 +41,8 @@ class MazeShell: NSObject {
     }
     
     func setCell(x: Int, y: Int, itemStore: [Item], coordinateStore: [(Int,Int)]){
-        maze[x][y].setItemsInRoom(itemStore: itemStore, coordinatesStore: coordinateStore)
+        maze[x][y].setItemsInRoom(itemStore: itemStore,
+                                  coordinatesStore: coordinateStore)
     }
     
     func getSize() -> (Int,Int) {
@@ -70,13 +71,13 @@ class MazeShell: NSObject {
     
     func fillFirstRow() {
         var varietyCounter = 1
-        maze[0][0].setLeftWall(leftWall: true)
+        maze[0][0].setLeftWall(presenceOfTheLeftWall: true)
         for j in 0..<N{
-            maze[0][j].setUpWall(upWall: true)
+            maze[0][j].setUpWall(presenceOfTheTopWall: true)
             maze[0][j].variety = varietyCounter
             varietyCounter += 1
         }
-        maze[0][N-1].setRightWall(rightWall: true)
+        maze[0][N-1].setRightWall(presenceOfTheRightWall: true)
     }
     
     func fillRow(row: Int) {
@@ -91,50 +92,50 @@ class MazeShell: NSObject {
     
     func fillLastRow() {
         for j in 0..<N-1{
-            maze[M-1][j].setDownWall(downWall: true)
+            maze[M-1][j].setDownWall(presenceOfTheBottomWall: true)
             if maze[M-1][j].variety != maze[M-1][j+1].variety{
-                maze[M-1][j].setRightWall(rightWall: false)
-                maze[M-1][j+1].setLeftWall(leftWall: false)
+                maze[M-1][j].setRightWall(presenceOfTheRightWall: false)
+                maze[M-1][j+1].setLeftWall(presenceOfTheLeftWall: false)
             }
             if maze[M-2][j].getDownWall(){
-                maze[M-1][j].setUpWall(upWall: true)
+                maze[M-1][j].setUpWall(presenceOfTheTopWall: true)
             }
         }
         if maze[M-2][N-1].getDownWall(){
-            maze[M-1][N-1].setUpWall(upWall: true)
+            maze[M-1][N-1].setUpWall(presenceOfTheTopWall: true)
         }
-        maze[M-1][N-1].setDownWall(downWall: true)
+        maze[M-1][N-1].setDownWall(presenceOfTheBottomWall: true)
     }
     
     func createRightWallsAt(row: Int) {
         var randomInt : Int
-        for j in 0..<N-1{
-            if maze[row][j].variety == maze[row][j+1].variety{
-                maze[row][j].setRightWall(rightWall: true)
-                maze[row][j+1].setLeftWall(leftWall: true)
+        for j in 0..<N-1 {
+            if maze[row][j].variety == maze[row][j+1].variety {
+                maze[row][j].setRightWall(presenceOfTheRightWall: true)
+                maze[row][j+1].setLeftWall(presenceOfTheLeftWall: true)
                 continue
             }
             randomInt = Int.random(in: 0...10)
             if randomInt < 7{
                 maze[row][j+1].variety = maze[row][j].variety
             }else{
-                maze[row][j].setRightWall(rightWall: true)
-                maze[row][j+1].setLeftWall(leftWall: true)
+                maze[row][j].setRightWall(presenceOfTheRightWall: true)
+                maze[row][j+1].setLeftWall(presenceOfTheLeftWall: true)
             }
         }
     }
     
     func checkLastCellDownWall(row: Int)  {
-        if maze[row][N-2] != maze[row][N-1]{
-            if maze[row][N-1].getDownWall(){
-                maze[row][N-1].setDownWall(downWall: false)
+        if maze[row][N-2] != maze[row][N-1] {
+            if maze[row][N-1].getDownWall() {
+                maze[row][N-1].setDownWall(presenceOfTheBottomWall: false)
             }
         }
     }
     
     func searchIsolationInIdexes(startIndexOfVariety: Int, endIndexOfVariety: Int , row: Int) -> Bool {
-        for i in startIndexOfVariety...endIndexOfVariety{
-            if maze[row][i].getDownWall() == false{
+        for i in startIndexOfVariety...endIndexOfVariety {
+            if maze[row][i].getDownWall() == false {
                 return true
             }
         }
@@ -143,10 +144,10 @@ class MazeShell: NSObject {
     
     func createDownWallsAt(row: Int) {
         var randomInt : Int
-        for j in 0..<N{
+        for j in 0..<N {
             randomInt = Int.random(in: 0...10)
-            if randomInt < 7{
-                maze[row][j].setDownWall(downWall: true)
+            if randomInt < 7 {
+                maze[row][j].setDownWall(presenceOfTheBottomWall: true)
             }
         }
         checkingAndFixIsolatedAreasAt(row: row)
@@ -168,10 +169,11 @@ class MazeShell: NSObject {
                 }
             }
             check = searchIsolationInIdexes(startIndexOfVariety: startIndexOfVariety,
-                                            endIndexOfVariety: endIndexOfVariety, row: row)
-            if !check{
+                                            endIndexOfVariety: endIndexOfVariety,
+                                            row: row)
+            if !check {
                 randomInt = Int.random(in: startIndexOfVariety...endIndexOfVariety)
-                maze[row][randomInt].setDownWall(downWall: false)
+                maze[row][randomInt].setDownWall(presenceOfTheBottomWall: false)
             }
             cursor += 1
             startIndexOfVariety = cursor
@@ -181,32 +183,32 @@ class MazeShell: NSObject {
     }
     
     func copyRow(row: Int) {
-        for j in 0..<N{
+        for j in 0..<N {
             maze[row][j] = maze[row-1][j].copy() as! Cell
         }
-        for j in 0..<N{
+        for j in 0..<N {
             if !maze[row-1][j].getDownWall(){
-                maze[row][j].setUpWall(upWall: false)
+                maze[row][j].setUpWall(presenceOfTheTopWall: false)
             }
         }
     }
     
     func deleteRightWallsAt(row: Int) {
-        for j in 0..<N-1{
-            maze[row][j].setRightWall(rightWall: false)
-            maze[row][j+1].setLeftWall(leftWall: false)
+        for j in 0..<N-1 {
+            maze[row][j].setRightWall(presenceOfTheRightWall: false)
+            maze[row][j+1].setLeftWall(presenceOfTheLeftWall: false)
         }
     }
     
     func deleteDownWallsAt(row: Int) {
-        for j in 0..<N{
-            maze[row][j].setDownWall(downWall: false)
+        for j in 0..<N {
+            maze[row][j].setDownWall(presenceOfTheBottomWall: false)
         }
     }
     
     func deleteVarietyThatHasDownWallAt(row: Int) {
-        for j in 0..<N{
-            if maze[row][j].getDownWall(){
+        for j in 0..<N {
+            if maze[row][j].getDownWall() {
                 maze[row][j].variety = 0
             }
         }
@@ -216,36 +218,36 @@ class MazeShell: NSObject {
         var maz : [[String]] = []
         for i in 0..<M*3 {
             maz.append([])
-            for _ in 0..<N*3{
+            for _ in 0..<N*3 {
                 maz[i].append(" ")
             }
         }
         for i in 0..<M {
-            for j in 0..<N{
-                if maze[i][j].getDownWall(){
+            for j in 0..<N {
+                if maze[i][j].getDownWall() {
                     maz[i*3+2][j*3] = "#"
                     maz[i*3+2][j*3+1] = "#"
                     maz[i*3+2][j*3+2] = "#"
                 }
-                if maze[i][j].getUpWall(){
+                if maze[i][j].getUpWall() {
                     maz[i*3][j*3] = "#"
                     maz[i*3][j*3+1] = "#"
                     maz[i*3][j*3+2] = "#"
                 }
-                if maze[i][j].getRightWall(){
+                if maze[i][j].getRightWall() {
                     maz[i*3][j*3+2] = "#"
                     maz[i*3+1][j*3+2] = "#"
                     maz[i*3+2][j*3+2] = "#"
                 }
-                if maze[i][j].getLeftWall(){
+                if maze[i][j].getLeftWall() {
                     maz[i*3][j*3] = "#"
                     maz[i*3+1][j*3] = "#"
                     maz[i*3+2][j*3] = "#"
                 }
             }
         }
-        for i in 0..<M*3{
-            for j in 0..<N*3{
+        for i in 0..<M*3 {
+            for j in 0..<N*3 {
                 print(maz[i][j], terminator:"")
             }
             print()

@@ -13,6 +13,7 @@ class Player: NSObject {
     private let inventory: InventoryProtocol
     private var health: Int
     private var selctedItemInInventory: Int
+    let maxHealth = 100
     
     override init() {
         inventory = Inventory()
@@ -20,13 +21,13 @@ class Player: NSObject {
         selctedItemInInventory = -1
     }
     
-    func getHealth() -> Int{
+    func getHealth() -> Int {
         return health
     }
     
-    func changeHealth(much: Int) -> Bool{
+    func changeHealth(much: Int) -> Bool {
         health += much
-        if health<0{
+        if health < 0 {
             return true
         }
         return false
@@ -34,12 +35,12 @@ class Player: NSObject {
     
     init(protocolImplementation: InventoryProtocol ) {
         self.inventory = protocolImplementation
-        self.health = 100
+        self.health = maxHealth
         self.selctedItemInInventory = -1
     }
     
     
-    func setSelctedItemInInventory(index: Int){
+    func setSelctedItemInInventory(index: Int) {
         selctedItemInInventory = index
     }
     
@@ -55,7 +56,7 @@ class Player: NSObject {
 
 extension Player: PlayerProtocol{
     func openChest(key: Key, chest: Chest) -> Bool {
-        if key.identifier == chest.keyIdentifier{
+        if key.identifier == chest.keyIdentifier {
             return true
         }else{
             print("Неверный ключ")
@@ -64,7 +65,7 @@ extension Player: PlayerProtocol{
     }
     
     func discardItem()  -> Bool {
-        if selctedItemInInventory != -1{
+        if selctedItemInInventory != -1 {
             inventory.removeItemAt(number: selctedItemInInventory)
             return false
         }
@@ -72,11 +73,11 @@ extension Player: PlayerProtocol{
     }
     
     func useItem() -> (Bool,String,Int){
-        if selctedItemInInventory != -1{
+        if selctedItemInInventory != -1 {
             let item = inventory.getItemStore()[selctedItemInInventory]
             switch item {
             case is EatableItem:
-                if changeHealth(much: (item as! EatableItem).countOfChangedHealth){
+                if changeHealth(much: (item as! EatableItem).countOfChangedHealth) {
                     return(true,"",-2)
                 }
                 _ = discardItem()

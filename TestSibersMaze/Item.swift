@@ -11,12 +11,12 @@ import UIKit
 class Item: NSObject{
     
     let name: String
-    let descript: String
+    let specification: String
     let image: UIImage
     
-    init(name: String, descript: String) {
+    init(name: String, specification: String) {
         self.name = name
-        self.descript = descript
+        self.specification = specification
         switch name {
         case "Сундук":
             image = UIImage(named: "chest.png")!
@@ -45,7 +45,8 @@ class Item: NSObject{
 
 extension Item: NSCopying{
     func copy(with zone: NSZone? = nil) -> Any {
-        let copy = Item(name: name, descript: descript)
+        let copy = Item(name: name,
+                        specification: specification)
         return copy
     }
 }

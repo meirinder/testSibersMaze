@@ -21,7 +21,7 @@ class Inventory: NSObject {
 }
 
 extension Inventory : InventoryProtocol{
-    func dropItemAt(number: Int) -> Item{
+    func dropItemAt(number: Int) -> Item {
         let item = itemStore[number]
         itemStore.remove(at: number)
         return item

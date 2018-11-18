@@ -20,7 +20,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="93H-uc-EGl">
                                 <rect key="frame" x="52.5" y="184" width="270" height="171"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите количество строк" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kA7-Kw-hhu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the number of lines" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kA7-Kw-hhu">
                                         <rect key="frame" x="0.0" y="0.0" width="270" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="X7g-2T-hrV"/>
@@ -38,8 +38,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введдите количество столбцов" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92u-1x-gjc">
-                                        <rect key="frame" x="9" y="70.5" width="252.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the number of columns" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92u-1x-gjc">
+                                        <rect key="frame" x="24" y="70.5" width="222" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="JXg-51-5hh"/>
                                         </constraints>
-                                        <state key="normal" title="Начать игру">
+                                        <state key="normal" title="Start game">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -361,7 +361,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description " lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGx-ei-6ic">
-                                        <rect key="frame" x="35" y="96" width="270" height="42"/>
+                                        <rect key="frame" x="36.5" y="96" width="270" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="2hM-sD-40g"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="TjH-aB-1EW"/>
@@ -443,7 +443,6 @@
                                 <color key="backgroundColor" red="1" green="0.75256219517214129" blue="0.75691433422644971" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="sea-bi-kme" secondAttribute="bottom" constant="16" id="084-FW-O2Y"/>
-                                    <constraint firstItem="KGx-ei-6ic" firstAttribute="leading" relation="lessThanOrEqual" secondItem="344-ii-vbW" secondAttribute="leading" constant="35" id="BEJ-wF-2ph"/>
                                     <constraint firstItem="acV-0F-Jjx" firstAttribute="leading" secondItem="344-ii-vbW" secondAttribute="leading" constant="16" id="Fy7-X3-O7Z"/>
                                     <constraint firstItem="sea-bi-kme" firstAttribute="leading" relation="lessThanOrEqual" secondItem="344-ii-vbW" secondAttribute="leading" constant="248" id="I3f-yp-gU2"/>
                                     <constraint firstItem="HyE-9O-9am" firstAttribute="centerX" secondItem="344-ii-vbW" secondAttribute="centerX" id="KaU-Js-7gk"/>
@@ -459,8 +458,8 @@
                                     <constraint firstItem="KGx-ei-6ic" firstAttribute="top" secondItem="344-ii-vbW" secondAttribute="top" constant="96" id="ojK-wU-UWy"/>
                                     <constraint firstItem="tu5-lg-52C" firstAttribute="leading" secondItem="344-ii-vbW" secondAttribute="leading" constant="35" id="pIv-Lh-8jU"/>
                                     <constraint firstItem="Rjm-R0-1FA" firstAttribute="leading" secondItem="344-ii-vbW" secondAttribute="leading" constant="16" id="qcG-04-p8p"/>
-                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="KGx-ei-6ic" secondAttribute="trailing" constant="38" id="sbO-xW-p3u"/>
                                     <constraint firstItem="acV-0F-Jjx" firstAttribute="top" secondItem="344-ii-vbW" secondAttribute="top" constant="8" id="x9m-cy-DtC"/>
+                                    <constraint firstItem="KGx-ei-6ic" firstAttribute="centerX" secondItem="344-ii-vbW" secondAttribute="centerX" id="zhp-3v-7Pm"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whg-Kl-XiI">

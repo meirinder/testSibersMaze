@@ -56,18 +56,20 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         descriptionLabel.text = ""
     }
     
-    @objc func pressed(_ sender: Any){
+    @objc func pressed(_ sender: Any) {
         let name = (sender as! UIButton).titleLabel?.text!
         var number = 0
-        for i in 0..<itemButtons.count{
+        for i in 0..<itemButtons.count {
             if sender as! UIButton == itemButtons[i]{
                 number = i
             }
         }
-        if name != "Сундук"{
-            let yItemCoordinate: Int = number/3
-            let xItemCoordinate: Int = number - 3*yItemCoordinate
-            game.raiseItem(name: name!, cellCoordinate: (game.getCurrentPositionOfPlayer()), itemCoordinate: (xItemCoordinate,yItemCoordinate))
+        if name != "Сундук" {
+            let yItemCoordinate: Int = number / 3
+            let xItemCoordinate: Int = number - (3 * yItemCoordinate)
+            game.raiseItem(name: name!,
+                           cellCoordinate: (game.getCurrentPositionOfPlayer()),
+                           itemCoordinate: (yItemCoordinate,xItemCoordinate))
             (sender as! UIButton).isHidden = true
             inventoryCollectionView.reloadData()
             return
@@ -77,30 +79,30 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
 
     @IBAction func rightStepAction(_ sender: Any) {
-        if game.nextStep(direction: "Right"){
+        if game.nextStep(direction: "Right") {
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
         }
-        for button in itemButtons{
+        for button in itemButtons {
             button.isHidden = true
         }
         displayCell()
     }
 
     @IBAction func downStepAction(_ sender: Any) {
-        if game.nextStep(direction: "Down"){
+        if game.nextStep(direction: "Down") {
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
         }
-        for button in itemButtons{
+        for button in itemButtons {
             button.isHidden = true
         }
         displayCell()
     }
 
     @IBAction func leftStepAction(_ sender: Any) {
-        if game.nextStep(direction: "Left"){
+        if game.nextStep(direction: "Left") {
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
         }
-        for button in itemButtons{
+        for button in itemButtons {
             button.isHidden = true
         }
         displayCell()
@@ -110,7 +112,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if game.nextStep(direction: "Up"){
             performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
         }
-        for button in itemButtons{
+        for button in itemButtons {
             button.isHidden = true
         }
         displayCell()
@@ -119,17 +121,22 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
 
     @IBAction func discardItemAction(_ sender: Any) {
-        if game.getPlayer().discardItem(){
-            Alert.action(title: "Error", message: "You must select an item", view: self)
+        if game.getPlayer().discardItem() {
+            Alert.action(title: "Error",
+                         message: "You must select an item",
+                         view: self)
         }
         inventoryCollectionView.reloadData()
     }
     @IBAction func dropItemAction(_ sender: Any) {
         let drop = game.dropItem(index: game.getPlayer().getSelctedItemInInventory(), cellCoordinate: game.getCurrentPositionOfPlayer())
         if drop.0{
-            Alert.action(title: "Error", message: drop.1, view: self)
+            Alert.action(title: "Error",
+                         message: drop.1,
+                         view: self)
         }
         inventoryCollectionView.reloadData()
+        
         displayCell()
     }
     @IBAction func useItemAction(_ sender: Any) {
@@ -137,20 +144,26 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if use.0{
             switch use.2{
             case -1:
-                Alert.action(title: "Error", message: "You must select an item", view: self)
+                Alert.action(title: "Error",
+                             message: "You must select an item",
+                             view: self)
                 break
             case -2:
                 performSegue(withIdentifier: "LoseEndGameSegue", sender: self)
                 break
             default:
-                Alert.action(title: "Error", message: "Unknown error", view: self)
+                Alert.action(title: "Error",
+                             message: "Unknown error",
+                             view: self)
                 break
             }
             
         }
         switch use.1 {
         case "Eat":
-            Alert.action(title: "\(use.2) hp", message: "You poisoned", view: self)
+            Alert.action(title: "\(use.2) hp",
+                         message: "You ate the mushroom",
+                         view: self)
             break
         case "Key":
             if game.getMazeShell().getMaze()[game.getCurrentPositionOfPlayer().0][game.getCurrentPositionOfPlayer().1].hasChest(){
@@ -169,11 +182,12 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
 
 
-    func displayCell(){
+    func displayCell() {
         healthLabel.text = "\(game.getPlayer().getHealth())"
         stepsCountLabel.text = "\(game.getStepCounter())"
-        let xCoordinate = game.getCurrentPositionOfPlayer().1
-        let yCoordinate = game.getCurrentPositionOfPlayer().0
+        descriptionLabel.text = ""
+        let xCoordinate = game.getCurrentPositionOfPlayer().x
+        let yCoordinate = game.getCurrentPositionOfPlayer().y
         let cell = game.getMazeShell().getMaze()[yCoordinate][xCoordinate]
         if cell.getDownWall() {
             downButton.isHidden = true
@@ -200,15 +214,17 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let coordinates = cell.getItemsCoordinates()
         
         for i in 0..<items.count {
-            fillButton(title: items[i].name, coordinates: coordinates[i], image: items[i].image)
+            fillButton(title: items[i].name,
+                       coordinates: coordinates[i],
+                       image: items[i].image)
         }
     }
 
-    func fillButton(title: String, coordinates: (Int,Int), image: UIImage) {
-        itemButtons[3 * coordinates.1 + coordinates.0].setBackgroundImage(image, for: .normal)
-        itemButtons[3 * coordinates.1 + coordinates.0].titleLabel?.isHidden = true
-        itemButtons[3 * coordinates.1 + coordinates.0].setTitle(title, for: .normal)
-        itemButtons[3 * coordinates.1 + coordinates.0].isHidden = false
+    func fillButton(title: String, coordinates: (y: Int, x: Int), image: UIImage) {
+        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].setBackgroundImage(image, for: .normal)
+        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].titleLabel?.isHidden = true
+        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].setTitle(title, for: .normal)
+        itemButtons[game.numberOfItemsPerLineOrColumn * coordinates.y + coordinates.x].isHidden = false
     }
     
 
@@ -228,9 +244,9 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = indexPath.item
         game.getPlayer().setSelctedItemInInventory(index: currentCell)
-        if (((game.getPlayer().getInventory().getItemStore()[currentCell]) is EatableItem)||((game.getPlayer().getInventory().getItemStore()[currentCell]) is Key)){
+        if (((game.getPlayer().getInventory().getItemStore()[currentCell]) is EatableItem)||((game.getPlayer().getInventory().getItemStore()[currentCell]) is Key)) {
             useItemButton.isHidden = false
-        }else{
+        }else {
             useItemButton.isHidden = true
         }
         dropItemButton.isHidden = false
@@ -239,7 +255,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell?.layer.borderWidth = 2
         cell?.layer.borderColor = UIColor.green.cgColor
         collectionView.allowsMultipleSelection = false
-        descriptionLabel.text = game.getPlayer().getInventory().getItemStore()[currentCell].descript
+        descriptionLabel.text = game.getPlayer().getInventory().getItemStore()[currentCell].specification
     }
 
 

@@ -12,8 +12,10 @@ class Game: NSObject {
     private let player: Player
     private let mazeShell: MazeShell
     private var stepCounter: Int
-    private var currentPositionOfPlayer: (Int,Int)
-    private let mazeSize: (Int,Int)
+    private var currentPositionOfPlayer: (y: Int, x: Int)
+    private let mazeSize: (y: Int, x: Int)
+    let numberOfItemsPerLineOrColumn = 3
+    let maxItemCountInCell = 9
     
     override init() {
         player = Player()
@@ -41,15 +43,18 @@ class Game: NSObject {
         return mazeShell
     }
     
-    func startGame(){
-        currentPositionOfPlayer = ((mazeSize.0)/2,(mazeSize.1)/2)
+    func startGame() {
+        currentPositionOfPlayer = ((mazeSize.y)/2,(mazeSize.x)/2)
         let cellFactory = CellFactory()
         var coordinates: [(Int,Int)]
         var items: [Item]
-        for i in 0..<mazeSize.0 {
-            for j in 0..<mazeSize.1{
-                (items,coordinates) = cellFactory.createCell(sizeX: 3, sizeY: 3)
-                mazeShell.setCell(x: i, y: j, itemStore: items, coordinateStore: coordinates)
+        for i in 0..<mazeSize.y {
+            for j in 0..<mazeSize.x {
+                (items,coordinates) = cellFactory.createCell(numberOfItemsPerLineOrColumn: numberOfItemsPerLineOrColumn)
+                mazeShell.setCell(x: i,
+                                  y: j,
+                                  itemStore: items,
+                                  coordinateStore: coordinates)
             }
         }
         distributeKeyAndChest()
@@ -59,67 +64,70 @@ class Game: NSObject {
         return stepCounter
     }
  
-    func getCurrentPositionOfPlayer() -> (Int,Int) {
+    func getCurrentPositionOfPlayer() -> (y: Int,x: Int) {
         return currentPositionOfPlayer
     }
     
-    func distributeKeyAndChest(){
-        let key = Key(name: "Ключ", descript: "This is the key - he opens the chest", identifier: "1")
-        var xCellCoordinate = Int.random(in: 0...mazeSize.1-1)
-        var yCellCoordinate = Int.random(in: 0...mazeSize.0-1)
+    func distributeKeyAndChest() {
+        let key = Key(name: "Ключ",
+                      specification: "This is the key - he opens the chest",
+                      identifier: "1")
+        var xCellCoordinate = Int.random(in: 0..<mazeSize.y)
+        var yCellCoordinate = Int.random(in: 0..<mazeSize.x)
         
-        mazeShell.getMaze()[yCellCoordinate][xCellCoordinate].addItemAndCoordinate(item: key, coordinate: searchEptySpace(cell: mazeShell.getMaze()[yCellCoordinate][xCellCoordinate]))
-    
+        mazeShell.getMaze()[yCellCoordinate][xCellCoordinate].addItemAndCoordinate(item: key,
+                                                                                   coordinate: searchEptySpace(cell: mazeShell.getMaze()[yCellCoordinate][xCellCoordinate], cellSize: (3,3)))
         print("\(xCellCoordinate) Key \(yCellCoordinate)")
+        xCellCoordinate = Int.random(in: 0..<mazeSize.x)
+        yCellCoordinate = Int.random(in: 0..<mazeSize.y)
+        let chest = Chest(name: "Сундук",
+                          specification: "This is a chest - opens with a key",
+                          keyIdentifier: "1")
         
-        xCellCoordinate = Int.random(in: 0...mazeSize.1-1)
-        yCellCoordinate = Int.random(in: 0...mazeSize.0-1)
-        
-        let chest = Chest(name: "Сундук", descript: "This is a chest - opens with a key", keyIdentifier: "1")
-        
-        mazeShell.getMaze()[yCellCoordinate][xCellCoordinate].addItemAndCoordinate(item: chest, coordinate: searchEptySpace(cell: mazeShell.getMaze()[yCellCoordinate][xCellCoordinate]))
+        mazeShell.getMaze()[yCellCoordinate][xCellCoordinate].addItemAndCoordinate(item: chest, coordinate: searchEptySpace(cell: mazeShell.getMaze()[yCellCoordinate][xCellCoordinate],cellSize: (3,3)))
         print("\(xCellCoordinate) chest \(yCellCoordinate)")
     }
     
     
     
-    func searchEptySpace(cell: Cell) -> (Int,Int){
-        var xCoordinate = Int.random(in: 0...2)
-        var yCoordinate = Int.random(in: 0...2)
-        while (checkItemSpace(xCoordinate: xCoordinate, yCoordinate: yCoordinate,
-                              coordinateStore: cell.getItemsCoordinates())){
-                                xCoordinate = Int.random(in: 0...2)
-                                yCoordinate = Int.random(in: 0...2)
+    func searchEptySpace(cell: Cell, cellSize: (y: Int, x: Int)) -> (Int,Int) {
+        var xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
+        var yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
+        while (checkItemSpace(xCoordinate: xCoordinate,
+                              yCoordinate: yCoordinate,
+                              coordinateStore: cell.getItemsCoordinates())) {
+                                xCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
+                                yCoordinate = Int.random(in: 0..<numberOfItemsPerLineOrColumn)
         }
         return (yCoordinate,xCoordinate)
     }
     
-    func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(Int,Int)]) -> Bool{
-        for coordinate in coordinateStore{
-            if xCoordinate == coordinate.1 && yCoordinate == coordinate.0 {
+    func checkItemSpace(xCoordinate: Int, yCoordinate: Int, coordinateStore : [(y: Int, x: Int)]) -> Bool {
+        for coordinate in coordinateStore {
+            if xCoordinate == coordinate.x && yCoordinate == coordinate.y {
                 return true
             }
         }
         return false
     }
     
-    func nextStep(direction: String) -> Bool{
-        if player.changeHealth(much: -1){
+    func nextStep(direction: String) -> Bool {
+        if player.changeHealth(much: -1) {
             return true
         }
         stepCounter += 1
         switch direction {
         case "Up":
-            currentPositionOfPlayer.0 -= 1
+            currentPositionOfPlayer.y -= 1
             break
         case"Down":
-            currentPositionOfPlayer.0 += 1
+            currentPositionOfPlayer.y += 1
             break
         case "Right":
-            currentPositionOfPlayer.1 += 1
+            currentPositionOfPlayer.x += 1
             break
         case "Left":
-            currentPositionOfPlayer.1 -= 1
+            currentPositionOfPlayer.x -= 1
             break
         default:
             print("Incorrect direction")
@@ -127,9 +135,8 @@ class Game: NSObject {
         return false
     }
     
-    func raiseItem(name: String, cellCoordinate: (Int,Int), itemCoordinate: (Int,Int)){
-        let cell = mazeShell.getMaze()[cellCoordinate.0][cellCoordinate.1]
-        
+    func raiseItem(name: String, cellCoordinate: (y: Int, x: Int), itemCoordinate: (y: Int, x: Int)) {
+        let cell = mazeShell.getMaze()[cellCoordinate.y][cellCoordinate.x]
         var i = 0;
         while cell.getItemsCoordinates()[i] != itemCoordinate {
             i += 1
@@ -138,10 +145,10 @@ class Game: NSObject {
         player.getInventory().putItem(item: item)
     }
     
-    func dropItem(index: Int, cellCoordinate: (Int,Int)) -> (Bool,String){
-        let cell = mazeShell.getMaze()[cellCoordinate.0][cellCoordinate.1]
-        if (index != -1){
-            if cell.getItemsInRoom().count>8 {
+    func dropItem(index: Int, cellCoordinate: (y: Int, x: Int)) -> (Bool,String) {
+        let cell = mazeShell.getMaze()[cellCoordinate.y][cellCoordinate.x]
+        if (index != -1) {
+            if cell.getItemsInRoom().count >= maxItemCountInCell {
                 return (true, "No space")
             }
             let item = player.getInventory().dropItemAt(number: index)
